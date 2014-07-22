@@ -2,7 +2,7 @@ var gulp = require('gulp');
 var gutil = require('gulp-util');
 var bower = require('bower');
 var concat = require('gulp-concat');
-var sass = require('gulp-sass');
+// var sass = require('gulp-sass');
 var coffee = require('gulp-coffee');
 var minifyCss = require('gulp-minify-css');
 var rename = require('gulp-rename');
@@ -24,7 +24,7 @@ var paths = {
 gulp.task('sass', function() {
   gulp.src(paths.sass)
     .pipe(plumber())
-    .pipe(sass())
+    // .pipe(sass())
     .pipe(minifyCss({
       keepSpecialComments: 0
     }))
