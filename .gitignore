@@ -3,3 +3,4 @@ www/
 platforms/
 plugins/
 .DS_Store
+my-release-key.keystore
