@@ -1,0 +1,35 @@
+<ion-nav-view>
+<ion-view ng-controller="DeviseLoginCtrl">
+
+
+  <ion-nav-bar class="bar bar-header bar-dark">
+    <h1 class="title">{{title}}</h1>
+  </ion-nav-bar>
+  <ion-content class="has-header">
+    <form ng-model="loginForm" ng-submit="login()">
+      <div>
+        <label class="item item-input">
+          <input type="text" placeholder="Email" ng-model="loginForm.email">
+        </label>
+      </div>
+
+      <div>
+        <label class="item item-input">
+          <input type="password" placeholder="Password" ng-model="loginForm.password">
+        </label>
+      </div>
+
+      <div>
+        <button type="submit" class="button button-full button-energized">
+          Sign In
+        </button>
+      </div>
+      
+    </form>
+    
+    <a class="button button-full button-energized" href="#/sign_up">
+      Create an account
+    </a>
+    </div>
+  </ion-content>
+</ion-view>

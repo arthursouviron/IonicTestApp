@@ -1,0 +1,36 @@
+<ion-view title="Sign Up" >
+  
+  <!-- <ion-nav-buttons>
+    <ion-nav-back-button class="button-clear"><i class="icon ion-ios7-arrow-back"></i> Back</ion-nav-back-button>
+  </ion-nav-buttons>     -->
+  
+
+
+  <ion-content class="has-header">
+    <form ng-model="signUpForm" ng-submit="signUp()">
+      <div>
+        <label class="item item-input">
+          <input type="text" placeholder="Email" ng-model="signUpForm.email">
+        </label>
+      </div>
+
+      <div>
+        <label class="item item-input">
+          <input type="password" placeholder="Password" ng-model="signUpForm.password">
+        </label>
+      </div>
+
+      <div>
+        <label class="item item-input">
+          <input type="password" placeholder="Password" ng-model="signUpForm.password_confirmation">
+        </label>
+      </div>
+
+      <div>
+        <button type="submit" class="button button-full button-balanced">
+          Create an account
+        </button>
+      </div>
+    </div>
+  </ion-content>
+</ion-view>

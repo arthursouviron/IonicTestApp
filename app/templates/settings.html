@@ -1,0 +1,15 @@
+<ion-view title="{{title}}" hide-back-button="true">
+  <!-- <ion-nav-bar class="bar bar-header bar-positive" title="{{contact.email}}"> -->
+  <ion-nav-buttons side="left">
+    <button menu-toggle="left" class="button button-icon icon ion-navicon"></button>
+  </ion-nav-buttons>
+  <!-- </ion-nav-bar> -->
+  <ion-content class="has-header">
+    
+    <img class="avatar" ng-src="{{avatar}}"></img>
+    <img class="avatar" ng-src="{{avatar2}}"></img>
+    <button ng-click="takePicture()" class="button button-full">Take Picture</button>
+    <button ng-click="sendPicture()" class="button button-full">Send Picture</button>
+   
+  </ion-content>
+</ion-view>
