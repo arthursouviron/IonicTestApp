@@ -1,0 +1,27 @@
+<ion-view title="CONVERSATIONNNN">
+  <!-- <ion-nav-bar class="bar bar-header bar-positive" title="{{contact.email}}"> -->
+  <ion-nav-buttons>
+    <ion-nav-back-button class="button-clear"><i class="icon ion-ios7-arrow-back"></i> Back</ion-nav-back-button>
+  </ion-nav-buttons>    
+  <!-- </ion-nav-bar> -->
+  <ion-content class="has-header">
+   
+  <ol class="messages">
+    <li ng-class='{other: message.sender_id == user.id}'  ng-repeat="message in conversation.messages">
+      <p> {{ message.content}} </p>
+    </li>
+  </ol>
+
+  
+  </ion-content>
+  <ion-footer-bar keyboard-attach class="bar bar-assertive">
+    <label class="item-input-wrapper">
+      <input type="text" placeholder="Message" ng-model="msgInput" maxlength="250">
+    </label>
+    <button class="button button-clear" ng-click="sendMessage()">
+      Send
+    </button>
+  </ion-footer-bar>
+
+
+</ion-view>

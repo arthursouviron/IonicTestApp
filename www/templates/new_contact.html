@@ -1,0 +1,33 @@
+<ion-view title="{{title}}">
+  <!-- <ion-header-bar class="bar bar-header bar-positive">
+    <h1 class="title">{{title}}</h1>
+  </ion-header-bar> -->
+  <ion-content class="has-header">
+    <form ng-model="contactForm" ng-submit="createContact()">
+      <div>
+        <label class="item item-input">
+          <input type="text" placeholder="Email" ng-model="contactForm.email">
+        </label>
+      </div>
+
+      <div>
+        <label class="item item-input">
+          <input type="text" placeholder="First Name" ng-model="contactForm.first_name">
+        </label>
+      </div>
+
+      <div>
+        <label class="item item-input">
+          <input type="text" placeholder="Last Name" ng-model="contactForm.last_name">
+        </label>
+      </div>
+      
+      <div>
+        <button type="submit" class="button button-full button-balanced">
+          Create contact
+        </button>
+      </div>
+      
+    </form>
+  </ion-content>
+</ion-view>

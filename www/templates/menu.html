@@ -1,0 +1,45 @@
+<ion-side-menus >
+
+  <ion-pane ion-side-menu-content drag-content='false'>
+    <ion-nav-bar class="bar bar-header bar-positive nav-title-slide-ios7">
+      <ion-nav-buttons side="left">
+        <ion-nav-back-button class="button-clear"><i class="icon ion-ios7-arrow-back"></i> Back</ion-nav-back-button>
+      </ion-nav-button>
+    </ion-nav-bar>
+    <ion-nav-view name="menuContent" animation="slide-left-right"></ion-nav-view>
+  </ion-pane>
+
+  <ion-side-menu side="left">
+    <header class="bar bar-header bar-stable">
+      <h1 class="title">Left</h1>
+    </header>
+    <ion-content class="has-header">
+      <ion-list>
+       
+        <ion-item class="item-icon-left" nav-clear menu-close href="#/app/contacts">
+          <i class="icon ion-ios7-people"></i>
+          Contacts
+        </ion-item>
+
+        <ion-item class="item-icon-left" nav-clear menu-close href="#/app/users">
+          <i class="icon ion-ios7-people"></i>
+          Users
+        </ion-item>
+
+
+        <ion-item class="item-icon-left" nav-clear menu-close href="#/app/maps">
+          <i class="icon ion-ios7-location"></i>
+          Maps
+        </ion-item>
+        <ion-item class="item-icon-left" nav-clear menu-close href="#/app/settings">
+          <i class="icon ion-ios7-gear"></i>
+          Settings
+        </ion-item>
+        <ion-item class="item-icon-left" nav-clear menu-close href="#/app/sign_out">
+          <i class="icon ion-power"></i>
+          Log out
+        </ion-item>
+      </ion-list>
+    </ion-content>
+  </ion-side-menu>
+</ion-side-menus>

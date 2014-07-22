@@ -1,0 +1,21 @@
+<ion-view hide-back-button="true">
+  <ion-nav-buttons side="left">
+    <button menu-toggle="left" class="button button-icon icon ion-navicon"></button>
+  </ion-nav-buttons>
+  <ion-nav-buttons side="right">
+    <a class="button icon ion-person-add button-clear right" href="#"></a>
+  </ion-nav-buttons>
+  <ion-view title="{{title}}">
+    <ion-content class="has-header">
+      <label class="item item-input">
+        <i class="icon ion-search placeholder-icon"></i>
+        <input type="search" ng-model="searchConversation" placeholder="Search">
+      </label>
+      <ion-list>
+        <ion-item class="item-avatar" item="conversation" ng-repeat="conversation in conversations | filter:searchConversation" href="#/app/conversations/{{conversation.id}}">
+          <img src="http://placehold.it/300x200/00aeef/fff"/>
+        </ion-item>
+      </ion-list>
+    </ion-content>
+  </ion-view>
+</ion-view>
