@@ -93,7 +93,7 @@ app = angular.module("mobileApp", [
         controller: 'ConversationIndexCtrl'
   )
   .state("app.conversation_details",
-    url: '/conversations/:conversationId'
+    url: '/conversations/:conversationId?msg'
     views:
       'menuContent' :
         templateUrl: 'templates/conversation.html'

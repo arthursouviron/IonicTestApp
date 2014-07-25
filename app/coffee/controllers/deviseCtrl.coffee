@@ -6,6 +6,11 @@ deviseCtrl.controller( 'DeviseLoginCtrl', ($scope, $location, deviseService, loa
   $scope.loginForm.email = "test@test.com"
   $scope.loginForm.password = "password"
 
+  deviseService.loadSession
+    success: () ->
+      pushNotificationsService.initPush()
+      $state.go('app.contacts', {}, {location: 'replace'})
+
 
   $scope.login = () ->
     loadingService.show

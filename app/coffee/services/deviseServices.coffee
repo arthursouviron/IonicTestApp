@@ -11,6 +11,7 @@ deviseServices.service 'deviseService', ($http, applicationService) ->
       ).success( (res) ->
         options.success()
       ).error( (res) ->
+        window.localStorage.clear()
         options.error()
       )
 
@@ -18,7 +19,6 @@ deviseServices.service 'deviseService', ($http, applicationService) ->
   login : (options) ->
     backendUrl = applicationService.getBackEndInfos()
    
-    window.localStorage.clear()
 
     $http(
       method: 'POST'
@@ -31,7 +31,6 @@ deviseServices.service 'deviseService', ($http, applicationService) ->
           password: options.password
     ).success( (res) ->
       if res && res.success && res.user
-        console.log('RES =>', res)
         res.user.avatar_url = res.avatar_url
         window.localStorage.setItem('user', JSON.stringify(res.user))
         window.localStorage.setItem('user_id', res.user.id)

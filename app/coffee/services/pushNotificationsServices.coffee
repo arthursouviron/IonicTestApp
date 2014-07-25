@@ -76,20 +76,20 @@ pushNotifications.service 'pushNotificationsService',  ($rootScope, $http, appli
       
       #############################
 
-      pushNotification = window.plugins.pushNotification
+      # pushNotification = window.plugins.pushNotification
 
-      if device.platform is "android" or device.platform is "Android" or device.platform is "amazon-fireos"
-        pushNotification.register successHandler, errorHandler,
-          senderID: '872299617457'
-          ecb: "onNotificationGCM"
+      # if device.platform is "android" or device.platform is "Android" or device.platform is "amazon-fireos"
+      #   pushNotification.register successHandler, errorHandler,
+      #     senderID: '872299617457'
+      #     ecb: "onNotificationGCM"
 
-      else
-        alert('IOS ou autre')
-        pushNotification.register tokenHandler, errorHandler,
-          badge: "true"
-          sound: "true"
-          alert: "true"
-          ecb: "onNotificationAPN"
+      # else
+      #   alert('IOS ou autre')
+      #   pushNotification.register tokenHandler, errorHandler,
+      #     badge: "true"
+      #     sound: "true"
+      #     alert: "true"
+      #     ecb: "onNotificationAPN"
 
 
   

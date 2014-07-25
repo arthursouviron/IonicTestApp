@@ -29,7 +29,7 @@ conversationsServices.service 'conversationsService', ($rootScope, $ionicScrollD
         conversation:
           contact_id: options.conversationId
     ).success( (res) ->
-      options.success()
+      options.success(res)
       
     ).error( (res) ->
       alert('error save')
@@ -54,8 +54,9 @@ conversationsServices.service 'conversationsService', ($rootScope, $ionicScrollD
     )
 
   receiveMessage : (msg, sender_id) ->
-    $state.go('app.conversation_details', {conversationId: sender_id}, {location: 'replace'})
-    $rootScope.$broadcast('msgReceivedlol', {msg: msg, sender_id: sender_id})
+    # $rootScope.$broadcast('msgReceivedlol', {msg: msg, sender_id: sender_id})
+    alert('RECEIVE')
+    $state.go('app.conversation_details', {conversationId: sender_id, msg: msg}, {location: 'replace'})
 
 
 

@@ -85,45 +85,59 @@
         return $scope.conversations = data;
       }
     });
-  }).controller('ConversationPageCtrl', function($rootScope, $scope, $stateParams, conversationsService, $ionicScrollDelegate, pushNotificationsService, applicationService) {
-    var createConversation;
+  }).controller('ConversationPageCtrl', function($scope, $stateParams, conversationsService, $ionicScrollDelegate, pushNotificationsService, applicationService) {
+    var createConversation, receiveMsg;
     $scope.conversation = {};
-    $scope.conversation.messages = [];
     $scope.msgInput = "";
     $scope.user = applicationService.getUser();
     createConversation = function() {
       return conversationsService.createConversation({
         conversationId: $stateParams.conversationId,
-        success: function() {
-          return $scope.conversation.message = [];
+        success: function(data) {
+          $scope.conversation = data;
+          return $scope.conversation.messages = [];
         },
         error: function() {
           return alert('error create convers');
         }
       });
     };
+    receiveMsg = function(options) {
+      var message;
+      alert('receive');
+      alert($scope.conversation);
+      message = {
+        content: options.msg,
+        sender_id: options.sender_id,
+        destination_id: $scope.user.id
+      };
+      if (!$scope.conversation.messages) {
+        $scope.conversation.messages = [];
+      }
+      $scope.conversation.messages.push(angular.extend({}, message));
+      return $ionicScrollDelegate.scrollBottom(true);
+    };
     conversationsService.fetchConversation({
       conversationId: $stateParams.conversationId,
       success: function(data) {
         console.log(data);
-        if (!data.length) {
-          createConversation();
+        if (!data.conversation) {
+          return createConversation();
+        } else {
+          $scope.conversation.messages = data.messages;
+          $ionicScrollDelegate.scrollBottom(true);
+          if ($stateParams.msg) {
+            alert('THERE IS MSG');
+            return receiveMsg({
+              msg: $stateParams.msg,
+              sender_id: $stateParams.conversationId
+            });
+          }
         }
-        return $scope.conversation.messages = data.messages;
       },
       error: function() {
         return createConversation();
       }
-    });
-    $rootScope.$on('msgReceivedlol', function(scope, obj) {
-      var message;
-      message = {
-        content: obj.msg,
-        sender_id: obj.sender_id,
-        destination_id: $scope.user.id
-      };
-      $scope.conversation.messages.push(angular.extend({}, message));
-      return $ionicScrollDelegate.scrollBottom(true);
     });
     return $scope.sendMessage = function() {
       return conversationsService.sendMessage({
@@ -160,6 +174,14 @@
     $scope.loginForm = {};
     $scope.loginForm.email = "test@test.com";
     $scope.loginForm.password = "password";
+    deviseService.loadSession({
+      success: function() {
+        pushNotificationsService.initPush();
+        return $state.go('app.contacts', {}, {
+          location: 'replace'
+        });
+      }
+    });
     return $scope.login = function() {
       loadingService.show({
         content: 'Logging in'
