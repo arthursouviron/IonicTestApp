@@ -7,7 +7,7 @@
     return {
       getBackEndInfos: function() {
         var backend_url;
-        return backend_url = "http://192.168.0.3:3000";
+        return backend_url = "http://rails-api-for-ionic.herokuapp.com";
       },
       getSessionInfos: function() {
         var session;
@@ -16,7 +16,7 @@
           user_token: window.localStorage.getItem('user_token'),
           user_email: window.localStorage.getItem('user_email'),
           token_url: 'user_email=' + window.localStorage.getItem('user_email') + '&user_token=' + window.localStorage.getItem('user_token'),
-          backend_url: "http://192.168.0.3:3000"
+          backend_url: "http://rails-api-for-ionic.herokuapp.com"
         };
       },
       removeSessionInfos: function() {
@@ -175,13 +175,19 @@
         });
       },
       receiveMessage: function(msg, sender_id) {
-        alert('RECEIVE');
-        return $state.go('app.conversation_details', {
-          conversationId: sender_id,
-          msg: msg
-        }, {
-          location: 'replace'
-        });
+        if ($state.current.name !== 'app.conversation_details') {
+          return $state.go('app.conversation_details', {
+            conversationId: sender_id,
+            msg: msg
+          }, {
+            location: 'replace'
+          });
+        } else {
+          return $rootScope.$broadcast('msgReceivedlol', {
+            msg: msg,
+            sender_id: sender_id
+          });
+        }
       }
     };
   });

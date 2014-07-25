@@ -11,11 +11,13 @@ conversationsCtrl.controller( 'conversationsIndexCtrl', ($scope, conversationsSe
     success : (data) ->
       $scope.conversations = data
 
-).controller( 'ConversationPageCtrl', ($scope, $stateParams, conversationsService, $ionicScrollDelegate, pushNotificationsService, applicationService) ->
+).controller( 'ConversationPageCtrl', ($scope, $rootScope, $stateParams, conversationsService, $ionicScrollDelegate, pushNotificationsService, applicationService) ->
 
   $scope.conversation = {}
   $scope.msgInput = ""
   $scope.user = applicationService.getUser()
+
+
 
   createConversation = () ->
     conversationsService.createConversation
@@ -26,29 +28,27 @@ conversationsCtrl.controller( 'conversationsIndexCtrl', ($scope, conversationsSe
       error: () ->
         alert('error create convers')
 
-  receiveMsg = (options) ->
-    alert('receive')
-    alert $scope.conversation
-    message = {content: options.msg, sender_id: options.sender_id, destination_id: $scope.user.id}
-    if !$scope.conversation.messages
-      $scope.conversation.messages = []
-    $scope.conversation.messages.push(angular.extend({}, message))
-    $ionicScrollDelegate.scrollBottom(true)
-
-
-
-
-  # $scope.$on 'msgReceivedlol', (scope, obj) ->
-  #   alert('on')
+  # receiveMsg : (options) ->
+  #   alert('receive')
   #   alert $scope.conversation
-  #   message = {content: obj.msg, sender_id: obj.sender_id, destination_id: $scope.user.id}
-  #   # $state.go('app.conversation_details', {}, {location: 'replace'})
+  #   message = {content: options.msg, sender_id: options.sender_id, destination_id: $scope.user.id}
   #   if !$scope.conversation.messages
   #     $scope.conversation.messages = []
   #   $scope.conversation.messages.push(angular.extend({}, message))
   #   $ionicScrollDelegate.scrollBottom(true)
 
-    # # $ionicFrostedDelegate.update();
+
+
+
+  $rootScope.$on 'msgReceivedlol', (scope, obj) ->
+    message = {content: obj.msg, sender_id: obj.sender_id, destination_id: $scope.user.id}
+    # $state.go('app.conversation_details', {}, {location: 'replace'})
+    if !$scope.conversation.messages
+      $scope.conversation.messages = []
+    $scope.conversation.messages.push(angular.extend({}, message))
+    $ionicScrollDelegate.scrollBottom(true)
+
+    # $ionicFrostedDelegate.update();
 
   conversationsService.fetchConversation
     conversationId: $stateParams.conversationId
@@ -61,9 +61,8 @@ conversationsCtrl.controller( 'conversationsIndexCtrl', ($scope, conversationsSe
         $scope.conversation.messages = data.messages
         $ionicScrollDelegate.scrollBottom(true)
         if $stateParams.msg
-          alert('THERE IS MSG')
-          receiveMsg({msg: $stateParams.msg, sender_id: $stateParams.conversationId})
-          # $scope.$broadcast('msgReceivedlol', {msg: $stateParams.msg, sender_id: sender_id})
+          # @.receiveMsg({msg: $stateParams.msg, sender_id: $stateParams.conversationId})
+          $rootScope.$broadcast('msgReceivedlol', {msg: $stateParams.msg, sender_id: $stateParams.conversationId})
 
 
 

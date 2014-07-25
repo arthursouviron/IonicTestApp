@@ -54,9 +54,9 @@ conversationsServices.service 'conversationsService', ($rootScope, $ionicScrollD
     )
 
   receiveMessage : (msg, sender_id) ->
-    # $rootScope.$broadcast('msgReceivedlol', {msg: msg, sender_id: sender_id})
-    alert('RECEIVE')
-    $state.go('app.conversation_details', {conversationId: sender_id, msg: msg}, {location: 'replace'})
-
+    if $state.current.name != 'app.conversation_details'
+      $state.go('app.conversation_details', {conversationId: sender_id, msg: msg}, {location: 'replace'})
+    else
+      $rootScope.$broadcast('msgReceivedlol', {msg: msg, sender_id: sender_id})
 
 

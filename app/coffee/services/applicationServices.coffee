@@ -6,8 +6,8 @@ applicationServices.service 'applicationService', () ->
 
   getBackEndInfos : () ->
     #backend_url = "http://localhost:3000"
-    #backend_url = "http://arcane-falls-5190.herokuapp.com"
-    backend_url = "http://192.168.0.3:3000"
+    backend_url = "http://rails-api-for-ionic.herokuapp.com"
+    #backend_url = "http://192.168.0.3:3000"
     #backend_url = "http://192.168.1.46:3000"
 
 
@@ -18,8 +18,8 @@ applicationServices.service 'applicationService', () ->
       user_email: window.localStorage.getItem('user_email')
       token_url: 'user_email=' + window.localStorage.getItem('user_email') + '&user_token=' + window.localStorage.getItem('user_token')
       #backend_url: "http://localhost:3000"
-      #backend_url: "http://arcane-falls-5190.herokuapp.com"
-      backend_url: "http://192.168.0.3:3000"
+      backend_url: "http://rails-api-for-ionic.herokuapp.com"
+      #backend_url: "http://192.168.0.3:3000"
       #backend_url: "http://192.168.1.46:3000" 
     }
 

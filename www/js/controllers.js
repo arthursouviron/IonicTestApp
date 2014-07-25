@@ -85,8 +85,8 @@
         return $scope.conversations = data;
       }
     });
-  }).controller('ConversationPageCtrl', function($scope, $stateParams, conversationsService, $ionicScrollDelegate, pushNotificationsService, applicationService) {
-    var createConversation, receiveMsg;
+  }).controller('ConversationPageCtrl', function($scope, $rootScope, $stateParams, conversationsService, $ionicScrollDelegate, pushNotificationsService, applicationService) {
+    var createConversation;
     $scope.conversation = {};
     $scope.msgInput = "";
     $scope.user = applicationService.getUser();
@@ -102,13 +102,11 @@
         }
       });
     };
-    receiveMsg = function(options) {
+    $rootScope.$on('msgReceivedlol', function(scope, obj) {
       var message;
-      alert('receive');
-      alert($scope.conversation);
       message = {
-        content: options.msg,
-        sender_id: options.sender_id,
+        content: obj.msg,
+        sender_id: obj.sender_id,
         destination_id: $scope.user.id
       };
       if (!$scope.conversation.messages) {
@@ -116,7 +114,7 @@
       }
       $scope.conversation.messages.push(angular.extend({}, message));
       return $ionicScrollDelegate.scrollBottom(true);
-    };
+    });
     conversationsService.fetchConversation({
       conversationId: $stateParams.conversationId,
       success: function(data) {
@@ -127,8 +125,7 @@
           $scope.conversation.messages = data.messages;
           $ionicScrollDelegate.scrollBottom(true);
           if ($stateParams.msg) {
-            alert('THERE IS MSG');
-            return receiveMsg({
+            return $rootScope.$broadcast('msgReceivedlol', {
               msg: $stateParams.msg,
               sender_id: $stateParams.conversationId
             });
@@ -172,8 +169,6 @@
   deviseCtrl.controller('DeviseLoginCtrl', function($scope, $location, deviseService, loadingService, $state, pushNotificationsService) {
     $scope.title = 'TITELU';
     $scope.loginForm = {};
-    $scope.loginForm.email = "test@test.com";
-    $scope.loginForm.password = "password";
     deviseService.loadSession({
       success: function() {
         pushNotificationsService.initPush();

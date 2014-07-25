@@ -3,8 +3,8 @@ deviseCtrl = angular.module 'deviseCtrl', ['deviseServices', 'loadingServices', 
 deviseCtrl.controller( 'DeviseLoginCtrl', ($scope, $location, deviseService, loadingService, $state, pushNotificationsService) ->
   $scope.title = 'TITELU'
   $scope.loginForm = {}
-  $scope.loginForm.email = "test@test.com"
-  $scope.loginForm.password = "password"
+  # $scope.loginForm.email = "test@test.com"
+  # $scope.loginForm.password = "password"
 
   deviseService.loadSession
     success: () ->
