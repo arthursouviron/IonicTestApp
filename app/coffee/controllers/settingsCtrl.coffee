@@ -5,8 +5,8 @@ settingsCtrl.controller 'SettingCtrl', ($scope, settingsService, $ionicPlatform,
   user = applicationService.getUser()
   
   console.log(user)
-  $scope.avatar = applicationService.getBackEndInfos() + user.avatar_url
-
+  # $scope.avatar = applicationService.getBackEndInfos() + user.avatar_url
+  $scope.avatar = ""
   $scope.takePicture = () ->
     $ionicPlatform.ready ->
       navigator.camera.getPicture setPictureData, ((message) ->

@@ -169,14 +169,6 @@
   deviseCtrl.controller('DeviseLoginCtrl', function($scope, $location, deviseService, loadingService, $state, pushNotificationsService) {
     $scope.title = 'TITELU';
     $scope.loginForm = {};
-    deviseService.loadSession({
-      success: function() {
-        pushNotificationsService.initPush();
-        return $state.go('app.contacts', {}, {
-          location: 'replace'
-        });
-      }
-    });
     return $scope.login = function() {
       loadingService.show({
         content: 'Logging in'
@@ -305,7 +297,7 @@
     $scope.title = 'Settings';
     user = applicationService.getUser();
     console.log(user);
-    $scope.avatar = applicationService.getBackEndInfos() + user.avatar_url;
+    $scope.avatar = "";
     $scope.takePicture = function() {
       return $ionicPlatform.ready(function() {
         return navigator.camera.getPicture(setPictureData, (function(message) {

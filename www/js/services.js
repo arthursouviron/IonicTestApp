@@ -7,7 +7,7 @@
     return {
       getBackEndInfos: function() {
         var backend_url;
-        return backend_url = "http://rails-api-for-ionic.herokuapp.com";
+        return backend_url = "http://192.168.0.3:3000";
       },
       getSessionInfos: function() {
         var session;
@@ -16,7 +16,7 @@
           user_token: window.localStorage.getItem('user_token'),
           user_email: window.localStorage.getItem('user_email'),
           token_url: 'user_email=' + window.localStorage.getItem('user_email') + '&user_token=' + window.localStorage.getItem('user_token'),
-          backend_url: "http://rails-api-for-ionic.herokuapp.com"
+          backend_url: "http://192.168.0.3:3000"
         };
       },
       removeSessionInfos: function() {
@@ -338,7 +338,7 @@
         user = applicationService.getUser();
         console.log(user);
         return $ionicPlatform.ready(function() {
-          var errorHandler, pushNotification, sendRegisterID, successHandler;
+          var errorHandler, sendRegisterID, successHandler;
           sendRegisterID = function(token) {
             var backend_url;
             backend_url = applicationService.getBackEndInfos();
@@ -364,28 +364,13 @@
           errorHandler = function(error) {
             return alert('error=' + error);
           };
-          window.onNotificationGCM = function(e) {
+          return window.onNotificationGCM = function(e) {
             if (e.event === 'registered') {
               return sendRegisterID(e.regid);
             } else if (e.event === 'message') {
               return conversationsService.receiveMessage(e.message, e.payload.data.sender_id);
             }
           };
-          pushNotification = window.plugins.pushNotification;
-          if (device.platform === "android" || device.platform === "Android" || device.platform === "amazon-fireos") {
-            return pushNotification.register(successHandler, errorHandler, {
-              senderID: '872299617457',
-              ecb: "onNotificationGCM"
-            });
-          } else {
-            alert('IOS ou autre');
-            return pushNotification.register(tokenHandler, errorHandler, {
-              badge: "true",
-              sound: "true",
-              alert: "true",
-              ecb: "onNotificationAPN"
-            });
-          }
         });
       }
     };

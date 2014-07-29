@@ -25,7 +25,7 @@
     "type": "git",
     "url": "ssh://git@github.com/Niarklol/IonicTestApp.git"
   },
-  "author": "",
+  "author": "Arthur Souviron",
   "license": "ISC",
   "bugs": {
     "url": "https://github.com/Niarklol/IonicTestApp/issues"
